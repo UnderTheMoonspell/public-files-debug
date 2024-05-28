@@ -16,16 +16,15 @@
       marqeta.bootstrap({
         clientAccessToken: new URLSearchParams(window.location.search).get('token'),
         component: {
-          "showPan": {
-            "cardPan": {
-              "domId": "mq-card-pan",
-              "format": true,
-              "styles": {
-                "span": {
-                  "background": "green",
-                  "color": "white",
-                  "font-weight": "bold"
-                }
+          showPan: {
+            cardPan: {
+              domId: "mq-card-pan",
+              format: true,
+              styles: {
+                span: {
+                  color: "white",
+                  "font-family": 'UniversalSans-500'
+                },
               }
             }
           }
