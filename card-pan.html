@@ -3,10 +3,6 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script async>
-    function runMarqeta() {
-      setTimeout(function () { bootstrap() }, 0)
-    }
-
     function bootstrap() {
       marqeta.bootstrap({
         clientAccessToken: new URLSearchParams(window.location.search).get('token'),
@@ -24,14 +20,6 @@
               }
             }
           }
-        },
-        callbackEvents: {
-          onSuccess: function () {
-            console.log("Success!")
-          },
-          onFailure: function (error) {
-            console.error(error);
-          }
         }
       })
     }
@@ -40,15 +28,13 @@
 
 <body>
   <div id="container">
-    <!-- <div>TESTE</div> -->
     <div id="mq-card-pan"></div>
-    <!-- <div>TESTE 2</div>
-    <div id="mq-card-exp"></div>
+    <!-- <div id="mq-card-exp"></div>
     <div id="mq-card-cvv"></div> -->
   </div>
 
   <script type="text/javascript" src="https://widgets-sandbox.marqeta.com/marqetajs/2.0.0/marqeta.min.js"
-    onload="runMarqeta()"></script>
+    onload="bootstrap()"></script>
 </body>
 
 </html>
