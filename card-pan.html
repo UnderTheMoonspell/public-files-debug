@@ -7,8 +7,8 @@
       marqeta.bootstrap({
         clientAccessToken: new URLSearchParams(window.location.search).get('token'),
         component: {
-          "showPan": {
-            "cardPan": {
+          showPan: {
+            cardPan: {
               "domId": "mq-card-pan",
               "format": true,
               "styles": {
@@ -18,8 +18,19 @@
                   "font-family": "Arial"
                 }
               }
+            },
+            cardExp: {
+              "domId": "mq-card-exp",
+              "format": true,
+              "styles": {
+                "span": {
+                  "color": "#B5B8D1",
+                  "font-weight": "bold",
+                  "font-family": "Arial"
+                }
+              }
             }
-          }
+          },
         }
       })
     }
@@ -28,9 +39,9 @@
 
 <body>
   <div id="container">
+    <div id="mq-card-exp" style="margin-bottom: 8px;"></div>
     <div id="mq-card-pan"></div>
-    <!-- <div id="mq-card-exp"></div>
-    <div id="mq-card-cvv"></div> -->
+    <!-- <div id="mq-card-cvv"></div> -->
   </div>
 
   <script type="text/javascript" src="https://widgets-sandbox.marqeta.com/marqetajs/2.0.0/marqeta.min.js"
