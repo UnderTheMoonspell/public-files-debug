@@ -2,8 +2,65 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <head>
+    <style>
+      body {
+        min-height: 70px;
+      }
+
+      .data-item {
+        height: 20px;
+        margin-bottom: 2px;
+      }
+
+      #data-error {
+        font-family: Helvetica, Arial, sans-serif;
+        color: #B5B8D1;
+        padding-top: 8px;
+      }
+
+      /* HTML: <div class="loader"></div> */
+      #loader {
+        position: absolute;
+        left: 10;
+        bottom: 10;
+        width: 20px;
+        aspect-ratio: 1;
+        display: grid;
+        border-radius: 50%;
+        background:
+          linear-gradient(0deg, rgb(181 184 209/50%) 30%, #0000 0 70%, rgb(181 184 209/100%) 0) 50%/8% 100%,
+          linear-gradient(90deg, rgb(181 184 209/25%) 30%, #0000 0 70%, rgb(181 184 209/75%) 0) 50%/100% 8%;
+        background-repeat: no-repeat;
+        animation: l23 1s infinite steps(12);
+      }
+
+      #loader::before,
+      #loader::after {
+        content: "";
+        grid-area: 1/1;
+        border-radius: 50%;
+        background: inherit;
+        opacity: 0.915;
+        transform: rotate(30deg);
+      }
+
+      #loader::after {
+        opacity: 0.83;
+        transform: rotate(60deg);
+      }
+
+      @keyframes l23 {
+        100% {
+          transform: rotate(1turn)
+        }
+      }
+    </style>
+  </head>
   <script async>
     function bootstrap() {
+      console.log("MARQETA START")
       marqeta.bootstrap({
         clientAccessToken: new URLSearchParams(window.location.search).get('token'),
         component: {
@@ -13,7 +70,7 @@
               "format": true,
               "styles": {
                 "span": {
-                  "color": "black",
+                  "color": "#B5B8D1",
                   "font-weight": "bold",
                   "font-family": "Helvetica"
                 }
@@ -41,6 +98,16 @@
               }
             },
           },
+        },
+        "callbackEvents": {
+          "onSuccess": () => {
+            document.getElementById('loader').style.display = 'none'
+            document.getElementById('data-container').style.display = 'block'
+          },
+          "onFailure": error => {
+            document.getElementById('loader').style.display = 'none'
+            document.getElementById('data-error').style.display = 'block'
+          }
         }
       })
     }
@@ -48,10 +115,15 @@
 </head>
 
 <body>
-  <div>
-    <div id="mq-card-pan"></div>
-    <div id="mq-card-exp"></div>
-    <div id="mq-card-cvv"></div>
+  <div id="data-container" style="display: none;">
+    <div id="mq-card-pan" class="data-item"></div>
+    <div id="mq-card-exp" class="data-item"></div>
+    <div id="mq-card-cvv" class="data-item"></div>
+  </div>
+  <div id="data-error" style="display: none">
+    <p>Error loading card data. Try again later.</p>
+  </div>
+  <div id="loader">
   </div>
 
   <script type="text/javascript" src="https://widgets-sandbox.marqeta.com/marqetajs/2.0.0/marqeta.min.js"
